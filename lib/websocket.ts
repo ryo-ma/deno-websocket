@@ -6,6 +6,6 @@ export class WebSocketServer extends WebSocket {
 
 }
 
-export class WebSocketClietn extends WebSocket {
+export class WebSocketClient extends WebSocket {
 
 }
