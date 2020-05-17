@@ -1,19 +1,34 @@
-import { WebSocket } from './websocket.ts'
-
+import { WebSocket } from "./websocket.ts";
 
 export class WSEvent {
-  constructor(private type: string, private target: WebSocket) {}
+  type: string;
+  target: WebSocket;
+
+  constructor(type: string, target: WebSocket) {
+    this.type = type;
+    this.target = target;
+  }
 }
 
 export class MessageWSEvent extends WSEvent {
-  constructor(private data: string | Uint8Array, target: WebSocket) {
+  data: string | Uint8Array;
+  constructor(data: string | Uint8Array, target: WebSocket) {
     super("message", target);
+    this.data = data;
   }
 }
 
 export class CloseWSEvent extends WSEvent {
-  constructor(private code: Number, private reason: string, target: WebSocket) {
+  code: Number;
+  reason: string | undefined;
+  constructor(
+    code: Number,
+    reason: string | undefined,
+    target: WebSocket,
+  ) {
     super("close", target);
+    this.code = code;
+    this.reason = reason;
   }
 }
 
@@ -24,9 +39,11 @@ export class OpenWSEvent extends WSEvent {
 }
 
 export class ErrorWSEvent extends WSEvent {
-  private message: string;
-  constructor(private error: Error, target: WebSocket) {
+  message: string;
+  error: Error;
+  constructor(error: Error, target: WebSocket) {
     super("open", target);
+    this.error = error;
     this.message = this.error.message;
   }
 }
