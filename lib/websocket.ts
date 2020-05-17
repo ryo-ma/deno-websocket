@@ -19,7 +19,7 @@ export class WebSocket extends EventEmitter {
 }
 
 export class WebSocketServer extends WebSocket {
-  constructor(private port: Number) {
+  constructor(private port: Number = 8080) {
     super();
     this.connect();
   }
