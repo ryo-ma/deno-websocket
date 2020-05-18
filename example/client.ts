@@ -3,7 +3,6 @@ import { BufReader } from "https://deno.land/std/io/bufio.ts";
 import { TextProtoReader } from "https://deno.land/std/textproto/mod.ts";
 import { blue, green, red, yellow } from "https://deno.land/std/fmt/colors.ts";
 import { WebSocket } from "../lib/websocket.ts";
-import { MessageWSEvent } from "../lib/event.ts";
 
 const endpoint = Deno.args[0] || "ws://127.0.0.1:8080";
 
@@ -11,8 +10,8 @@ const ws: WebSocket = new WebSocket(endpoint);
 ws.on("open", function() {
   console.log(green("ws connected! (type 'close' to quit)"));
 });
-ws.on("message", function (message: MessageWSEvent) {
-  console.log(message.data);
+ws.on("message", function (message: string) {
+  console.log(message);
 });
 
 /** simple websocket cli */
