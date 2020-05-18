@@ -10,6 +10,7 @@ import {
 } from "https://deno.land/std/ws/mod.ts";
 
 export class WebSocketServer extends EventEmitter {
+  clients: Set<WebSocket> = new Set<WebSocket>();
   constructor(private port: Number = 8080) {
     super();
     this.connect();
@@ -27,6 +28,7 @@ export class WebSocketServer extends EventEmitter {
         console.log("socket connected!");
         const ws: WebSocket = new WebSocket();
         ws.open(sock);
+        this.clients.add(ws);
         this.emit("connection", ws);
       } catch (err) {
         console.error(`failed to accept websocket: ${err}`);
