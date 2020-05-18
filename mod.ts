@@ -1,1 +1,1 @@
-export { WebSocketServer, WebSocketClient} from "./lib/websocket.ts";
+export { WebSocketServer, WebSocket } from "./lib/websocket.ts";

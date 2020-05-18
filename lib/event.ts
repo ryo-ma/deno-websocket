@@ -1,5 +1,4 @@
-import { WebSocket } from "./websocket.ts";
-
+import { WebSocket } from "./websocket.ts"
 export class WSEvent {
   type: string;
   target: WebSocket;
