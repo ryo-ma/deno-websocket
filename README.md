@@ -3,6 +3,24 @@
 
 # Quick Start
 
+## Example of cli
+
+server
+
+```bash
+$ deno run --allow-net https://deno.land/x/websocket/example/server.ts 
+```
+
+client
+
+```bash
+$ deno run --allow-net https://deno.land/x/websocket/example/client.ts 
+> ws connected! (type 'close' to quit)
+> something
+```
+
+## Usage
+
 server
 
 ```typescript
@@ -31,20 +49,4 @@ ws.on("message", function (message: string) {
   console.log(message);
 });
 ws.send("something");
-```
-
-## Example of cli
-
-server
-
-```bash
-$ deno run --allow-net https://deno.land/x/websocket/example/server.ts 
-```
-
-client
-
-```bash
-$ deno run --allow-net https://deno.land/x/websocket/example/client.ts 
-> ws connected! (type 'close' to quit)
-> something
 ```
