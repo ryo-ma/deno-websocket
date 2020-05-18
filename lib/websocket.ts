@@ -89,6 +89,9 @@ export class WebSocket extends EventEmitter {
   async close(code = 1000, reason?: string): Promise<void> {
     return this.webSocket!.close(code, reason!);
   }
+  async closeForce() {
+    return this.webSocket!.closeForce();
+  }
   get isClosed(): boolean | undefined {
     return this.webSocket!.isClosed;
   }
