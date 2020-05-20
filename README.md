@@ -3,7 +3,7 @@
 
 # Quick Start
 
-## Example of cli
+## Example
 
 server
 
