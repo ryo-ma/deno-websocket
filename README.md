@@ -55,7 +55,7 @@ ws.send("something");
 
 ## Event
 
-### WebSOcketServer (Server)
+### WebSocketServer (Server)
 
 | event | detail|
 | --- | --- |
