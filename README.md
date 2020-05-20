@@ -55,14 +55,14 @@ ws.send("something");
 
 ## Event
 
-### WebSocketServer (Server)
+### WebSocketServer
 
 | event | detail|
 | --- | --- |
 | connection | Emitted when the handshake is complete |
 
 
-### WebSocket (Client)
+### WebSocket
 
 | event | detail|
 | --- | --- |
