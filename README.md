@@ -50,3 +50,25 @@ ws.on("message", function (message: string) {
 });
 ws.send("something");
 ```
+
+# Documentation
+
+## Event
+
+### WebSOcketServer (Server)
+
+| event | detail|
+| --- | --- |
+| connection | Emitted when the handshake is complete |
+
+
+### WebSocket (Client)
+
+| event | detail|
+| --- | --- |
+| open | Emitted when the connection is established |
+| close | Emitted when the connection is closed |
+| message | Emitted when a message is received from the server |
+| ping | Emitted when a ping is received from the server |
+| pong | Emitted when a pong is received from the server |
+| error | Emitted when an error occurs |
