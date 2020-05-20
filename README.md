@@ -1,5 +1,5 @@
 # Deno WebSocket
-🦕A simple WebScoket library like [ws of node.js library](https://github.com/websockets/ws) for deno
+🦕A simple WebSocket library like [ws of node.js library](https://github.com/websockets/ws) for deno
 
 # Quick Start
 
