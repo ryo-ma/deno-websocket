@@ -31,6 +31,7 @@ export class WebSocketServer extends EventEmitter {
         this.clients.add(ws);
         this.emit("connection", ws);
       } catch (err) {
+        this.emit("error", err);
         console.error(`failed to accept websocket: ${err}`);
         await req.respond({ status: 400 });
       }

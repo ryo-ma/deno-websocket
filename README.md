@@ -60,6 +60,7 @@ ws.send("something");
 | event | detail|
 | --- | --- |
 | connection | Emitted when the handshake is complete |
+| error | Emitted when an error occurs |
 
 
 ### WebSocket
