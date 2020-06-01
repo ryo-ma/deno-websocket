@@ -8,10 +8,12 @@ const endpoint = Deno.args[0] || "ws://127.0.0.1:8080";
 
 const ws: WebSocket = new WebSocket(endpoint);
 ws.on("open", function() {
-  console.log(green("ws connected! (type 'close' to quit)"));
+  Deno.stdout.write(encode(green("ws connected! (type 'close' to quit)\n")));
+  Deno.stdout.write(encode("> "));
 });
 ws.on("message", function (message: string) {
-  console.log(message);
+  Deno.stdout.write(encode(`${message}\n`));
+  Deno.stdout.write(encode("> "));
 });
 
 /** simple websocket cli */
@@ -19,7 +21,6 @@ try {
   const cli = async (): Promise<void> => {
     const tpr = new TextProtoReader(new BufReader(Deno.stdin));
     while (true) {
-      await Deno.stdout.write(encode("> "));
       const line = await tpr.readLine();
       if (line === null || line === "close") {
         break;
@@ -35,6 +36,6 @@ try {
     await ws.close(1000).catch(console.error);
   }
 } catch (err) {
-  console.error(red(`Could not connect to WebSocket: '${err}'`));
+  Deno.stderr.write(encode(red(`Could not connect to WebSocket: '${err}'`)));
 }
 Deno.exit(0);
