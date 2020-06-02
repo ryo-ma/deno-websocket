@@ -57,13 +57,21 @@ ws.send("something");
 
 ### WebSocketServer
 
+#### Event
+
 | event | detail|
 | --- | --- |
 | connection | Emitted when the handshake is complete |
 | error | Emitted when an error occurs |
 
+#### Field
+
+| field | detail | type |
+| server.clients | A set that stores all connected clients | Set<WebSocket> |
 
 ### WebSocket
+
+#### Event
 
 | event | detail|
 | --- | --- |
