@@ -15,7 +15,7 @@ client
 
 ```bash
 $ deno run --allow-net https://deno.land/x/websocket/example/client.ts 
-> ws connected! (type 'close' to quit)
+ws connected! (type 'close' to quit)
 > something
 ```
 
