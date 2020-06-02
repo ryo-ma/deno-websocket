@@ -67,7 +67,8 @@ ws.send("something");
 #### Field
 
 | field | detail | type |
-| server.clients | A set that stores all connected clients | Set<WebSocket> |
+| --- | --- | --- |
+| server.clients | A set that stores all connected clients | Set\<WebSocket\> |
 
 ### WebSocket
 
