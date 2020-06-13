@@ -5,13 +5,13 @@
 
 ## Example
 
-server
+server side
 
 ```bash
 $ deno run --allow-net https://deno.land/x/websocket/example/server.ts 
 ```
 
-client
+client side
 
 ```bash
 $ deno run --allow-net https://deno.land/x/websocket/example/client.ts 
@@ -21,7 +21,7 @@ ws connected! (type 'close' to quit)
 
 ## Usage
 
-server
+server side
 
 ```typescript
 import { WebSocket, WebSocketServer } from "https://deno.land/x/websocket/mod.ts";
@@ -36,7 +36,7 @@ wss.on("connection", function (ws: WebSocket) {
 
 ```
 
-client
+client side
 
 ```typescript
 import { WebSocket } from "https://deno.land/x/websocket/mod.ts";
