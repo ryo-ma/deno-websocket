@@ -3,15 +3,15 @@
 
 # Quick Start
 
-## Example
+## Example Demo
 
-server side
+Server side
 
 ```bash
 $ deno run --allow-net https://deno.land/x/websocket/example/server.ts 
 ```
 
-client side
+Client side
 
 ```bash
 $ deno run --allow-net https://deno.land/x/websocket/example/client.ts 
@@ -21,7 +21,7 @@ ws connected! (type 'close' to quit)
 
 ## Usage
 
-server side
+Server side
 
 ```typescript
 import { WebSocket, WebSocketServer } from "https://deno.land/x/websocket/mod.ts";
@@ -36,7 +36,7 @@ wss.on("connection", function (ws: WebSocket) {
 
 ```
 
-client side
+Client side
 
 ```typescript
 import { WebSocket } from "https://deno.land/x/websocket/mod.ts";
