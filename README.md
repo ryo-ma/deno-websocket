@@ -1,8 +1,8 @@
 <div align="center">
-  <img src=".assets/logo.png" alt="logo"/>
+  <img src=".assets/logo.png" width="250" alt="logo"/>
 </div>
 
-# Deno WebSocket
+# deno websocket
 
 [![deno doc](https://img.shields.io/badge/deno-doc-informational?logo=deno)](https://doc.deno.land/https/deno.land/x/denon/mod.ts)
 
