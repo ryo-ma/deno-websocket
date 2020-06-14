@@ -1,10 +1,11 @@
 <div align="center">
-  <img src=".assets/logo.png" width="250" alt="logo"/>
+  <img src=".assets/logo.png" width="200" alt="logo"/>
 </div>
 
 # deno websocket
 
 [![deno doc](https://img.shields.io/badge/deno-doc-informational?logo=deno)](https://doc.deno.land/https/deno.land/x/denon/mod.ts)
+![GitHub](https://img.shields.io/github/license/ryo-ma/deno-websocket)
 
 🦕A simple WebSocket library like [ws of node.js library](https://github.com/websockets/ws) for deno
 
@@ -89,3 +90,6 @@ ws.send("something");
 | ping | Emitted when a ping is received from the server |
 | pong | Emitted when a pong is received from the server |
 | error | Emitted when an error occurs |
+
+# LICENSE
+[MIT LICENSE](./LICENSE)
