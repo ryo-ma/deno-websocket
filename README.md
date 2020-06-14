@@ -1,5 +1,5 @@
 <div align="center">
-  <img src=".assets/logo.png" width="200" alt="logo"/>
+  <img src="https://raw.githubusercontent.com/ryo-ma/deno-websocket/master/.assets/logo.png" width="200" alt="logo"/>
 </div>
 
 # deno websocket
