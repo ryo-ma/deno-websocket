@@ -13,6 +13,8 @@
 
 ## Example Demo
 
+![demo](https://user-images.githubusercontent.com/6661165/84665958-6df6d880-af5b-11ea-91b8-24c5122ddf9a.gif)
+
 Server side
 
 ```bash
