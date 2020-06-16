@@ -63,32 +63,30 @@ ws.send("something");
 
 # Documentation
 
-## Event
+## WebSocketServer
 
-### WebSocketServer
-
-#### Event
+### Event
 
 | event | detail|
 | --- | --- |
 | connection | Emitted when the handshake is complete |
 | error | Emitted when an error occurs |
 
-#### Field
+### Field
 
 | field | detail | type |
 | --- | --- | --- |
 | server.clients | A set that stores all connected clients | Set\<WebSocket\> |
 
-#### Method
+### Method
 
 | method | detail |
 | --- | --- |
 | close() | Close the server |
 
-### WebSocket
+## WebSocket
 
-#### Event
+### Event
 
 | event | detail|
 | --- | --- |
@@ -99,13 +97,13 @@ ws.send("something");
 | pong | Emitted when a pong is received from the server |
 | error | Emitted when an error occurs |
 
-#### Field
+### Field
 
 | field | detail | type |
 | --- | --- | --- |
 | websocket.isClose | Get the close flag | Boolean \| undefined |
 
-#### Method
+### Method
 
 | method | detail |
 | --- | --- |
