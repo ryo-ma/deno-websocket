@@ -99,6 +99,12 @@ ws.send("something");
 | pong | Emitted when a pong is received from the server |
 | error | Emitted when an error occurs |
 
+#### Field
+
+| field | detail | type |
+| --- | --- | --- |
+| server.isClose | Get the close flag | Boolean \| undefined |
+
 #### Method
 
 | method | detail |
@@ -107,7 +113,7 @@ ws.send("something");
 | ping(message:string \| Unit8Array) | Send the ping |
 | close([code:int[, reason:string]]) | Close the connection with the server |
 | forceClose() | Forcibly close the connection with the server |
-| isClose(): Boolean | Get the close flag |
+
 
 # LICENSE
 [MIT LICENSE](./LICENSE)
