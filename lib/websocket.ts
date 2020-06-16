@@ -1,5 +1,5 @@
 import { EventEmitter } from "https://deno.land/std/node/events.ts";
-import { serve } from "https://deno.land/std/http/server.ts";
+import { Server, serve } from "https://deno.land/std/http/server.ts";
 import {
   acceptWebSocket,
   isWebSocketCloseEvent,
@@ -11,12 +11,14 @@ import {
 
 export class WebSocketServer extends EventEmitter {
   clients: Set<WebSocket> = new Set<WebSocket>();
+  server?: Server = undefined;
   constructor(private port: Number = 8080) {
     super();
     this.connect();
   }
   async connect() {
-    for await (const req of serve(`:${this.port}`)) {
+    this.server = serve(`:${this.port}`);
+    for await (const req of this.server) {
       const { conn, r: bufReader, w: bufWriter, headers } = req;
       try {
         const sock = await acceptWebSocket({
@@ -36,6 +38,10 @@ export class WebSocketServer extends EventEmitter {
         await req.respond({ status: 400 });
       }
     }
+  }
+  async close() {
+    this.server?.close();
+    this.clients.clear();
   }
 }
 
