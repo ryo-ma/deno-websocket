@@ -80,6 +80,12 @@ ws.send("something");
 | --- | --- | --- |
 | server.clients | A set that stores all connected clients | Set\<WebSocket\> |
 
+#### Method
+
+| method | detail |
+| --- | --- |
+| close() | Close the server |
+
 ### WebSocket
 
 #### Event
@@ -92,6 +98,16 @@ ws.send("something");
 | ping | Emitted when a ping is received from the server |
 | pong | Emitted when a pong is received from the server |
 | error | Emitted when an error occurs |
+
+#### Method
+
+| method | detail |
+| --- | --- |
+| send(message:string\ | Unit8Array) | Send a message |
+| ping(message:string\ | Unit8Array) | Send the ping |
+| close([code:int[, reason:string]]) | Close the connection with the server |
+| forceClose() | Forcibly close the connection with the server |
+| isClose(): Boolean | Get the close flag |
 
 # LICENSE
 [MIT LICENSE](./LICENSE)
