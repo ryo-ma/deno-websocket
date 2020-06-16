@@ -10,24 +10,51 @@ const endpoint = "ws://127.0.0.1:8080";
 
 Deno.test(
   {
-    name: "Connect to server",
-    sanitizeOps: true,
-    sanitizeResources: true,
+    name: "Connect to the server",
     async fn(): Promise<void> {
       const wss = new WebSocketServer(8080);
       const connection = on(wss, "connection");
 
       const ws = new WebSocket(endpoint);
       const open = on(ws, "open");
-      for await (const event of connection) {
-        assertNotEquals(event, undefined);
-        break;
-      }
-      for await (const event of open) {
-        await wss.close();
-        await ws.close();
-        break;
-      }
+      const event = await connection.next();
+      assertNotEquals(event, undefined);
+
+      await open.next();
+      await ws.close();
+      assertEquals(ws.isClosed, true);
+
+      await wss.close();
     },
-  },
+  }
+);
+
+Deno.test(
+  {
+    name: "Connect to the server from the two clients",
+    async fn(): Promise<void> {
+      const wss = new WebSocketServer(8080);
+      const connection = on(wss, "connection");
+
+      const ws1 = new WebSocket(endpoint);
+      const ws2 = new WebSocket(endpoint);
+      const open1 = on(ws1, "open");
+      const open2 = on(ws2, "open");
+
+      let event = await connection.next();
+      assertNotEquals(event, undefined);
+      event = await connection.next();
+      assertNotEquals(event, undefined);
+
+      await open1.next();
+      await ws1.close();
+      assertEquals(ws1.isClosed, true);
+
+      await open2.next();
+      await ws2.close();
+      assertEquals(ws2.isClosed, true);
+
+      await wss.close();
+    },
+  }
 );
