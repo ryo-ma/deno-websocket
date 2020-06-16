@@ -103,8 +103,8 @@ ws.send("something");
 
 | method | detail |
 | --- | --- |
-| send(message:string\ | Unit8Array) | Send a message |
-| ping(message:string\ | Unit8Array) | Send the ping |
+| send(message:string \| Unit8Array) | Send a message |
+| ping(message:string \| Unit8Array) | Send the ping |
 | close([code:int[, reason:string]]) | Close the connection with the server |
 | forceClose() | Forcibly close the connection with the server |
 | isClose(): Boolean | Get the close flag |
