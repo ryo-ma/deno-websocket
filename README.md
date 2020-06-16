@@ -103,7 +103,7 @@ ws.send("something");
 
 | field | detail | type |
 | --- | --- | --- |
-| server.isClose | Get the close flag | Boolean \| undefined |
+| websocket.isClose | Get the close flag | Boolean \| undefined |
 
 #### Method
 
