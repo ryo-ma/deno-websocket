@@ -2,8 +2,9 @@ import {
   assertEquals,
   assertThrows,
   assertNotEquals,
+  assertThrowsAsync,
 } from "https://deno.land/std/testing/asserts.ts";
-import { WebSocket, WebSocketServer } from "./mod.ts";
+import { WebSocket, WebSocketServer, WebSocketError } from "./mod.ts";
 import { on } from "https://deno.land/std/node/events.ts";
 
 const endpoint = "ws://127.0.0.1:8080";
@@ -26,7 +27,7 @@ Deno.test(
 
       await wss.close();
     },
-  }
+  },
 );
 
 Deno.test(
@@ -56,5 +57,21 @@ Deno.test(
 
       await wss.close();
     },
-  }
+  },
+);
+Deno.test(
+  {
+    name: "Fails connection to the server",
+    async fn(): Promise<void> {
+      const wss = new WebSocketServer(8080);
+      const ws1 = new WebSocket(endpoint);
+      const connection = on(wss, "connection");
+      await assertThrowsAsync(async (): Promise<void> => {
+        await ws1.send("message");
+      }, WebSocketError);
+
+      await connection.next();
+      await wss.close();
+    },
+  },
 );
