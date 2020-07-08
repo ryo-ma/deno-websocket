@@ -68,7 +68,7 @@ Deno.test(
       const connection = on(wss, "connection");
       await assertThrowsAsync(async (): Promise<void> => {
         await ws1.send("message");
-      }, WebSocketError);
+      }, WebSocketError, "WebSocket is not open: state 0 (CONNECTING)");
 
       await connection.next();
       await wss.close();

@@ -104,7 +104,7 @@ export class WebSocket extends EventEmitter {
   async ping(message?: string | Uint8Array) {
     if (this.state === WebSocketState.CONNECTING) {
       throw new WebSocketError(
-        "WebSocket is not open: readyState 0 (CONNECTING)",
+        "WebSocket is not open: state 0 (CONNECTING)",
       );
     }
     return this.webSocket!.ping(message);
@@ -112,7 +112,7 @@ export class WebSocket extends EventEmitter {
   async send(message: string | Uint8Array) {
     if (this.state === WebSocketState.CONNECTING) {
       throw new WebSocketError(
-        "WebSocket is not open: readyState 0 (CONNECTING)",
+        "WebSocket is not open: state 0 (CONNECTING)",
       );
     }
     return this.webSocket!.send(message);
