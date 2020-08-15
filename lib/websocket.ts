@@ -1,5 +1,5 @@
-import { EventEmitter } from "https://deno.land/std/node/events.ts";
-import { Server, serve } from "https://deno.land/std/http/server.ts";
+import { EventEmitter } from "./../deps.ts";
+import { Server, serve } from "./../deps.ts";
 import {
   acceptWebSocket,
   isWebSocketCloseEvent,
@@ -7,7 +7,7 @@ import {
   isWebSocketPongEvent,
   connectWebSocket,
   WebSocket as STDWebSocket,
-} from "https://deno.land/std/ws/mod.ts";
+} from "./../deps.ts";
 
 import { WebSocketError } from "./errors.ts";
 
