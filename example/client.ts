@@ -1,7 +1,9 @@
-import { encode } from "https://deno.land/std/encoding/utf8.ts";
-import { BufReader } from "https://deno.land/std/io/bufio.ts";
-import { TextProtoReader } from "https://deno.land/std/textproto/mod.ts";
-import { blue, green, red, yellow } from "https://deno.land/std/fmt/colors.ts";
+import {
+  encode,
+  BufReader,
+  TextProtoReader,
+  blue, green, red, yellow
+} from "./deps.ts";
 import { WebSocket } from "../lib/websocket.ts";
 
 const endpoint = Deno.args[0] || "ws://127.0.0.1:8080";
