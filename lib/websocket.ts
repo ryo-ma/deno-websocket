@@ -36,14 +36,12 @@ export class WebSocketServer extends EventEmitter {
           bufWriter,
           headers,
         });
-        console.log("socket connected!");
         const ws: WebSocket = new WebSocket();
         ws.open(sock);
         this.clients.add(ws);
         this.emit("connection", ws);
       } catch (err) {
         this.emit("error", err);
-        console.error(`failed to accept websocket: ${err}`);
         await req.respond({ status: 400 });
       }
     }
@@ -97,7 +95,9 @@ export class WebSocket extends EventEmitter {
     } catch (err) {
       this.emit("close", err);
       if (!sock.isClosed) {
-        await sock.close(1000).catch(console.error);
+        await sock.close(1000).catch((e) => {
+          throw new WebSocketError(e);
+        });
       }
     }
   }

@@ -2,7 +2,7 @@ import {
   encode,
   BufReader,
   TextProtoReader,
-  blue, green, red, yellow
+  green, red
 } from "./deps.ts";
 import { WebSocket } from "../lib/websocket.ts";
 
