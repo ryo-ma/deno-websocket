@@ -6,6 +6,7 @@
 
 [![deno doc](https://img.shields.io/badge/deno-doc-informational?logo=deno)](https://doc.deno.land/https/deno.land/x/denon/mod.ts)
 ![GitHub](https://img.shields.io/github/license/ryo-ma/deno-websocket)
+[![nest badge](https://nest.land/badge.svg)](https://nest.land/package/deno-websocket)
 
 🦕 A simple WebSocket library like [ws of node.js library](https://github.com/websockets/ws) for deno
 
