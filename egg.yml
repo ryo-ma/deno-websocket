@@ -1,7 +1,7 @@
 name: deno-websocket
 description: A simple WebSocket library like ws of node.js library for Deno
 stable: true
-version: v0.0.3
+version: v0.0.4
 repository: https://github.com/ryo-ma/deno-websocket
 files:
   ./mod.ts
