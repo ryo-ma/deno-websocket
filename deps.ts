@@ -6,5 +6,8 @@ export {
   isWebSocketPingEvent,
   isWebSocketPongEvent,
   connectWebSocket,
-  WebSocket,    
+} from "https://deno.land/std@0.65.0/ws/mod.ts";
+
+export type {
+  WebSocket,
 } from "https://deno.land/std@0.65.0/ws/mod.ts";

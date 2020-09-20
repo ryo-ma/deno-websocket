@@ -1,2 +1,2 @@
-export { WebSocketServer, WebSocket, WebSocketState } from "./lib/websocket.ts";
-export { WebSocketError } from "./lib/errors.ts";
+export type { WebSocketServer, WebSocket, WebSocketState } from "./lib/websocket.ts";
+export type { WebSocketError } from "./lib/errors.ts";
