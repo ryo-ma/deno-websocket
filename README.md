@@ -12,6 +12,10 @@
 
 * Deno >= 1.2
 
+
+**⚠️ I will deprecate the implementation of WebSocket client in the next version. Please use the following API for WebSocket client**  
+https://deno.land/posts/v1.4#websocket-api
+
 # Quick Start
 
 ## Example Demo
