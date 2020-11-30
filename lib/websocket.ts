@@ -96,6 +96,11 @@ export class WebSocket extends EventEmitter {
       this.emit("close", err);
       if (!sock.isClosed) {
         await sock.close(1000).catch((e) => {
+          // This fixes issue #12 where if sent a null payload, the server would crash.
+          if (this.state === WebSocketState.CLOSING && sock.isClosed) {
+            this.state = WebSocketState.CLOSED;
+            return;
+          }
           throw new WebSocketError(e);
         });
       }
