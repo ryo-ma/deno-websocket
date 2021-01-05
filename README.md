@@ -26,13 +26,13 @@ https://deno.land/posts/v1.4#websocket-api
 Server side
 
 ```bash
-$ deno run --allow-net https://deno.land/x/websocket@v0.0.5/example/server.ts 
+$ deno run --allow-net https://deno.land/x/websocket@v0.0.6/example/server.ts
 ```
 
 Client side
 
 ```bash
-$ deno run --allow-net https://deno.land/x/websocket@v0.0.5/example/client.ts 
+$ deno run --allow-net https://deno.land/x/websocket@v0.0.6/example/client.ts
 ws connected! (type 'close' to quit)
 > something
 ```
@@ -42,7 +42,7 @@ ws connected! (type 'close' to quit)
 Server side
 
 ```typescript
-import { WebSocket, WebSocketServer } from "https://deno.land/x/websocket@v0.0.5/mod.ts";
+import { WebSocket, WebSocketServer } from "https://deno.land/x/websocket@v0.0.6/mod.ts";
 
 const wss = new WebSocketServer(8080);
 wss.on("connection", function (ws: WebSocket) {
@@ -57,7 +57,7 @@ wss.on("connection", function (ws: WebSocket) {
 Client side
 
 ```typescript
-import { WebSocket } from "https://deno.land/x/websocket@v0.0.5/mod.ts";
+import { WebSocket } from "https://deno.land/x/websocket@v0.0.6/mod.ts";
 const endpoint = "ws://127.0.0.1:8080";
 const ws: WebSocket = new WebSocket(endpoint);
 ws.on("open", function() {
