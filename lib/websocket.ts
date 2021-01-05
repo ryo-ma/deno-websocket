@@ -21,7 +21,7 @@ export enum WebSocketState {
 export class WebSocketServer extends EventEmitter {
   clients: Set<WebSocket> = new Set<WebSocket>();
   server?: Server = undefined;
-  constructor(private port: Number = 8080) {
+  constructor(private port: Number = 8080, private realIpHeader: string|null = null) {
     super();
     this.connect();
   }
@@ -37,6 +37,13 @@ export class WebSocketServer extends EventEmitter {
           headers,
         });
         const ws: WebSocket = new WebSocket();
+        if(this.realIpHeader && "hostname" in sock.conn.remoteAddr) {
+          if(!req.headers.has(this.realIpHeader)) {
+            this.emit("error", new Error('specified real ip header does not exist'));
+          } else {
+            sock.conn.remoteAddr.hostname = req.headers.get(this.realIpHeader) || sock.conn.remoteAddr.hostname;
+          }
+        }
         ws.open(sock);
         this.clients.add(ws);
         this.emit("connection", ws);
