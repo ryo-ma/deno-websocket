@@ -4,11 +4,11 @@ import {
   TextProtoReader,
   green, red
 } from "./deps.ts";
-import { WebSocket } from "../lib/websocket.ts";
+import { WebSocketClient, StandardWebSocketClient } from "../lib/websocket.ts";
 
 const endpoint = Deno.args[0] || "ws://127.0.0.1:8080";
 
-const ws: WebSocket = new WebSocket(endpoint);
+const ws: WebSocketClient = new StandardWebSocketClient(endpoint);
 ws.on("open", function() {
   Deno.stdout.write(encode(green("ws connected! (type 'close' to quit)\n")));
   Deno.stdout.write(encode("> "));
