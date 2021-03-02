@@ -4,7 +4,7 @@ import {
   assertNotEquals,
   assertThrowsAsync,
 } from "https://deno.land/std/testing/asserts.ts";
-import { WebSocket, WebSocketServer, WebSocketError } from "./mod.ts";
+import { StandardWebSocketClient, WebSocketClient, WebSocketServer, WebSocketError } from "./mod.ts";
 import { on } from "https://deno.land/std/node/events.ts";
 
 const endpoint = "ws://127.0.0.1:8080";
@@ -16,7 +16,7 @@ Deno.test(
       const wss = new WebSocketServer(8080);
       const connection = on(wss, "connection");
 
-      const ws = new WebSocket(endpoint);
+      const ws = new StandardWebSocketClient(endpoint);
       const open = on(ws, "open");
       const event = await connection.next();
       assertNotEquals(event, undefined);

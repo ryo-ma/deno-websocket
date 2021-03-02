@@ -10,12 +10,8 @@
 
 🦕 A simple WebSocket library like [ws of node.js library](https://github.com/websockets/ws) for deno
 
-* Deno >= 1.2
+* Deno >= 1.7.2
 
-
-**⚠️ I will deprecate the implementation of WebSocket client in the next version. But I will continue developing WebSocket Server.**  
-**Please use the following API for WebSocket client**  
-https://deno.land/posts/v1.4#websocket-api
 
 # Quick Start
 
@@ -26,13 +22,13 @@ https://deno.land/posts/v1.4#websocket-api
 Server side
 
 ```bash
-$ deno run --allow-net https://deno.land/x/websocket@v0.0.6/example/server.ts
+$ deno run --allow-net https://deno.land/x/websocket@v0.1.0/example/server.ts
 ```
 
 Client side
 
 ```bash
-$ deno run --allow-net https://deno.land/x/websocket@v0.0.6/example/client.ts
+$ deno run --allow-net https://deno.land/x/websocket@v0.1.0/example/client.ts
 ws connected! (type 'close' to quit)
 > something
 ```
@@ -42,10 +38,10 @@ ws connected! (type 'close' to quit)
 Server side
 
 ```typescript
-import { WebSocket, WebSocketServer } from "https://deno.land/x/websocket@v0.0.6/mod.ts";
+import { WebSocketClient, WebSocketServer } from "https://deno.land/x/websocket@v0.1.0/mod.ts";
 
 const wss = new WebSocketServer(8080);
-wss.on("connection", function (ws: WebSocket) {
+wss.on("connection", function (ws: WebSocketClient) {
   ws.on("message", function (message: string) {
     console.log(message);
     ws.send(message)
@@ -57,9 +53,9 @@ wss.on("connection", function (ws: WebSocket) {
 Client side
 
 ```typescript
-import { WebSocket } from "https://deno.land/x/websocket@v0.0.6/mod.ts";
+import { WebSocketClient, StandardWebSocketClient } from "https://deno.land/x/websocket@v0.1.0/mod.ts";
 const endpoint = "ws://127.0.0.1:8080";
-const ws: WebSocket = new WebSocket(endpoint);
+const ws: WebSocketClient = new StandardWebSocketClient(endpoint);
 ws.on("open", function() {
   console.log("ws connected!");
 });
@@ -92,7 +88,7 @@ ws.send("something");
 | --- | --- |
 | close() | Close the server |
 
-## WebSocket
+## WebSocketClient
 
 ### Event
 
