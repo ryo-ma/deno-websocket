@@ -207,6 +207,7 @@ export class StandardWebSocketClient extends EventEmitter
     throw new Error("Method not implemented.");
   }
   get isClosed(): boolean | undefined {
-    return this.webSocket!.readyState === WebSocketState.CLOSED;
+      return this.webSocket!.readyState === WebSocketState.CLOSING || 
+      this.webSocket!.readyState === WebSocketState.CLOSED
   }
 }

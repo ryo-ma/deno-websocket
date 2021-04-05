@@ -1,10 +1,16 @@
-export { EventEmitter } from "https://deno.land/std@0.88.0/node/events.ts";
-export { serve, Server } from "https://deno.land/std@0.88.0/http/server.ts";
+export { EventEmitter, on } from "https://deno.land/std@0.92.0/node/events.ts";
+export { serve, Server } from "https://deno.land/std@0.92.0/http/server.ts";
 export {
   acceptWebSocket,
   isWebSocketCloseEvent,
   isWebSocketPingEvent,
   isWebSocketPongEvent,
-} from "https://deno.land/std@0.88.0/ws/mod.ts";
+} from "https://deno.land/std@0.92.0/ws/mod.ts";
 
-export type { WebSocket } from "https://deno.land/std@0.88.0/ws/mod.ts";
+export type { WebSocket } from "https://deno.land/std@0.92.0/ws/mod.ts";
+
+export {
+  assertEquals,
+  assertNotEquals,
+  assertThrowsAsync,
+} from "https://deno.land/std@0.92.0/testing/asserts.ts";

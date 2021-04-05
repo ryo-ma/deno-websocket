@@ -1,11 +1,10 @@
 import {
   assertEquals,
-  assertThrows,
   assertNotEquals,
   assertThrowsAsync,
-} from "https://deno.land/std/testing/asserts.ts";
-import { StandardWebSocketClient, WebSocketClient, WebSocketServer, WebSocketError } from "./mod.ts";
-import { on } from "https://deno.land/std/node/events.ts";
+} from "./deps.ts";
+import { StandardWebSocketClient, WebSocketServer, WebSocketError } from "./mod.ts";
+import { on } from "./deps.ts";
 
 const endpoint = "ws://127.0.0.1:8080";
 
@@ -17,13 +16,16 @@ Deno.test(
       const connection = on(wss, "connection");
 
       const ws = new StandardWebSocketClient(endpoint);
+      assertEquals(ws.webSocket?.readyState, 0)
       const open = on(ws, "open");
       const event = await connection.next();
       assertNotEquals(event, undefined);
 
       await open.next();
+      assertEquals(ws.webSocket?.readyState, 1)
       await ws.close();
-      assertEquals(ws.isClosed, true);
+      assertEquals(ws.webSocket?.readyState, 2)
+      assertEquals(ws.isClosed, true)
 
       await wss.close();
     },
@@ -37,8 +39,8 @@ Deno.test(
       const wss = new WebSocketServer(8080);
       const connection = on(wss, "connection");
 
-      const ws1 = new WebSocket(endpoint);
-      const ws2 = new WebSocket(endpoint);
+      const ws1 = new StandardWebSocketClient(endpoint);
+      const ws2 = new StandardWebSocketClient(endpoint);
       const open1 = on(ws1, "open");
       const open2 = on(ws2, "open");
 
@@ -64,13 +66,16 @@ Deno.test(
     name: "Fails connection to the server",
     async fn(): Promise<void> {
       const wss = new WebSocketServer(8080);
-      const ws1 = new WebSocket(endpoint);
+      const ws = new StandardWebSocketClient(endpoint);
       const connection = on(wss, "connection");
+      const open = on(ws, "open");
       await assertThrowsAsync(async (): Promise<void> => {
-        await ws1.send("message");
+        await ws.send("message");
       }, WebSocketError, "WebSocket is not open: state 0 (CONNECTING)");
 
+      await open.next();
       await connection.next();
+      await ws.close();
       await wss.close();
     },
   },
