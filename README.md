@@ -10,7 +10,7 @@
 
 🦕 A simple WebSocket library like [ws of node.js library](https://github.com/websockets/ws) for deno
 
-* Deno >= 1.7.2
+* Deno >= 1.8.3
 
 
 # Quick Start
@@ -22,13 +22,13 @@
 Server side
 
 ```bash
-$ deno run --allow-net https://deno.land/x/websocket@v0.1.0/example/server.ts
+$ deno run --allow-net https://deno.land/x/websocket@v0.1.1/example/server.ts
 ```
 
 Client side
 
 ```bash
-$ deno run --allow-net https://deno.land/x/websocket@v0.1.0/example/client.ts
+$ deno run --allow-net https://deno.land/x/websocket@v0.1.1/example/client.ts
 ws connected! (type 'close' to quit)
 > something
 ```
@@ -38,7 +38,7 @@ ws connected! (type 'close' to quit)
 Server side
 
 ```typescript
-import { WebSocketClient, WebSocketServer } from "https://deno.land/x/websocket@v0.1.0/mod.ts";
+import { WebSocketClient, WebSocketServer } from "https://deno.land/x/websocket@v0.1.1/mod.ts";
 
 const wss = new WebSocketServer(8080);
 wss.on("connection", function (ws: WebSocketClient) {
@@ -53,7 +53,7 @@ wss.on("connection", function (ws: WebSocketClient) {
 Client side
 
 ```typescript
-import { WebSocketClient, StandardWebSocketClient } from "https://deno.land/x/websocket@v0.1.0/mod.ts";
+import { WebSocketClient, StandardWebSocketClient } from "https://deno.land/x/websocket@v0.1.1/mod.ts";
 const endpoint = "ws://127.0.0.1:8080";
 const ws: WebSocketClient = new StandardWebSocketClient(endpoint);
 ws.on("open", function() {
