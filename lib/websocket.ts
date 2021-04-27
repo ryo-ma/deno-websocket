@@ -173,7 +173,7 @@ export class StandardWebSocketClient extends EventEmitter
     if (this.endpoint !== undefined) {
       this.webSocket = new WebSocket(endpoint!);
       this.webSocket.onopen = () => this.emit("open");
-      this.webSocket.onmessage = (message) => this.emit("open", message);
+      this.webSocket.onmessage = (message) => this.emit("message", message);
       this.webSocket.onclose = () => this.emit("close");
       this.webSocket.onerror = () => this.emit("error");
     }
