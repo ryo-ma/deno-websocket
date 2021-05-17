@@ -10,6 +10,10 @@
 
 🦕 A simple WebSocket library like [ws of node.js library](https://github.com/websockets/ws) for deno
 
+This library is wrapping the [ws standard library](https://github.com/denoland/deno_std/tree/main/ws) as a server-side and the [native WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) as a client-side. 
+You can receive callbacks at the EventEmitter and can use the same object format on both the server-side and the client-side.
+
+
 * Deno >= 1.8.3
 
 
