@@ -52,7 +52,7 @@ export class WebSocketServer extends EventEmitter {
         }
         const ws: WebSocketAcceptedClient = new WebSocketAcceptedClient(sock);
         this.clients.add(ws);
-        this.emit("connection", ws);
+        this.emit("connection", ws, req.url);
       } catch (err) {
         this.emit("error", err);
         await req.respond({ status: 400 });
