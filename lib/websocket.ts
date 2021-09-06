@@ -74,7 +74,7 @@ export interface WebSocketClient extends EventEmitter {
 }
 
 export class WebSocketAcceptedClient extends EventEmitter
-  implements WebSocketClient {
+ implements WebSocketClient {
   state: WebSocketState = WebSocketState.CONNECTING;
   webSocket: DenoWebSocketType;
   constructor(sock: DenoWebSocketType) {
@@ -128,17 +128,22 @@ export class WebSocketAcceptedClient extends EventEmitter
     if (this.state === WebSocketState.CONNECTING) {
       throw new WebSocketError(
         "WebSocket is not open: state 0 (CONNECTING)",
-      );
+        );
     }
     return this.webSocket!.ping(message);
   }
   async send(message: string | Uint8Array) {
-    if (this.state === WebSocketState.CONNECTING) {
-      throw new WebSocketError(
-        "WebSocket is not open: state 0 (CONNECTING)",
-      );
+    try {
+      if (this.state === WebSocketState.CONNECTING) {
+        throw new WebSocketError(
+          "WebSocket is not open: state 0 (CONNECTING)",
+          );
+      }
+      return this.webSocket!.send(message);
+    } catch (error) {
+      this.state = WebSocketState.CLOSED;
+      this.emit("close", error.message);
     }
-    return this.webSocket!.send(message);
   }
   async close(code = 1000, reason?: string): Promise<void> {
     if (
@@ -182,7 +187,7 @@ export class StandardWebSocketClient extends EventEmitter
     if (this.webSocket?.readyState === WebSocketState.CONNECTING) {
       throw new WebSocketError(
         "WebSocket is not open: state 0 (CONNECTING)",
-      );
+        );
     }
     return this.webSocket!.send("ping");
   }
@@ -190,7 +195,7 @@ export class StandardWebSocketClient extends EventEmitter
     if (this.webSocket?.readyState === WebSocketState.CONNECTING) {
       throw new WebSocketError(
         "WebSocket is not open: state 0 (CONNECTING)",
-      );
+        );
     }
     return this.webSocket!.send(message);
   }
@@ -207,7 +212,7 @@ export class StandardWebSocketClient extends EventEmitter
     throw new Error("Method not implemented.");
   }
   get isClosed(): boolean | undefined {
-      return this.webSocket!.readyState === WebSocketState.CLOSING || 
+    return this.webSocket!.readyState === WebSocketState.CLOSING ||
       this.webSocket!.readyState === WebSocketState.CLOSED
   }
 }
