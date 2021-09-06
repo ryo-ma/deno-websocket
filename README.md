@@ -26,13 +26,13 @@ You can receive callbacks at the EventEmitter and can use the same object format
 Server side
 
 ```bash
-$ deno run --allow-net https://deno.land/x/websocket@v0.1.2/example/server.ts
+$ deno run --allow-net https://deno.land/x/websocket@v0.1.3/example/server.ts
 ```
 
 Client side
 
 ```bash
-$ deno run --allow-net https://deno.land/x/websocket@v0.1.2/example/client.ts
+$ deno run --allow-net https://deno.land/x/websocket@v0.1.3/example/client.ts
 ws connected! (type 'close' to quit)
 > something
 ```
@@ -42,7 +42,7 @@ ws connected! (type 'close' to quit)
 Server side
 
 ```typescript
-import { WebSocketClient, WebSocketServer } from "https://deno.land/x/websocket@v0.1.2/mod.ts";
+import { WebSocketClient, WebSocketServer } from "https://deno.land/x/websocket@v0.1.3/mod.ts";
 
 const wss = new WebSocketServer(8080);
 wss.on("connection", function (ws: WebSocketClient) {
@@ -57,7 +57,7 @@ wss.on("connection", function (ws: WebSocketClient) {
 Client side
 
 ```typescript
-import { WebSocketClient, StandardWebSocketClient } from "https://deno.land/x/websocket@v0.1.2/mod.ts";
+import { WebSocketClient, StandardWebSocketClient } from "https://deno.land/x/websocket@v0.1.3/mod.ts";
 const endpoint = "ws://127.0.0.1:8080";
 const ws: WebSocketClient = new StandardWebSocketClient(endpoint);
 ws.on("open", function() {
