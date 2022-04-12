@@ -1,5 +1,5 @@
 import { EventEmitter } from "./../deps.ts";
-import { serve, Server } from "./../deps.ts";
+import { serve, Server, ServerRequest } from "./../deps.ts";
 import {
   acceptWebSocket,
   isWebSocketCloseEvent,
@@ -17,7 +17,16 @@ export enum WebSocketState {
   CLOSED = 3,
 }
 
+export type DefaultServerEventTypes = {
+  connection: (ws: WebSocketClient, url: ServerRequest["url"]) => void;
+  error: (err: any) => void;
+};
+
 export class WebSocketServer extends EventEmitter {
+  on <K extends keyof DefaultServerEventTypes>(eventType: K, listener: DefaultServerEventTypes[K]): this;
+  on (...params: Parameters<EventEmitter["on"]>): this;
+  on (...params: Parameters<EventEmitter["on"]>): this { return super.on(...params) };
+
   clients: Set<WebSocketAcceptedClient> = new Set<WebSocketAcceptedClient>();
   server?: Server = undefined;
   constructor(
