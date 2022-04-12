@@ -17,16 +17,19 @@ export enum WebSocketState {
   CLOSED = 3,
 }
 
+export type EventTypesSet = { [key: string]: Parameters<EventEmitter["on"]>[1] }; 
 export type DefaultServerEventTypes = {
   connection: (ws: WebSocketClient, url: ServerRequest["url"]) => void;
-  error: (err: any) => void;
+  error: (err: Error | unknown) => void; // unknown is an "any" error in catch case - maybe worth wrapping?
 };
 
-export class WebSocketServer extends EventEmitter {
-  on <K extends keyof DefaultServerEventTypes>(eventType: K, listener: DefaultServerEventTypes[K]): this;
+export class GenericEventEmitter<EventTypes extends EventTypesSet> extends EventEmitter {
+  on <K extends keyof EventTypes>(eventType: K, listener: EventTypes[K]): this;
   on (...params: Parameters<EventEmitter["on"]>): this;
   on (...params: Parameters<EventEmitter["on"]>): this { return super.on(...params) };
+}
 
+export class WebSocketServer extends GenericEventEmitter<DefaultServerEventTypes> {
   clients: Set<WebSocketAcceptedClient> = new Set<WebSocketAcceptedClient>();
   server?: Server = undefined;
   constructor(
@@ -74,6 +77,15 @@ export class WebSocketServer extends EventEmitter {
   }
 }
 
+export type DefaultClientEventTypes = {
+  open: () => void;
+  message: (data: string | Uint8Array) => void;
+  ping: (data: Uint8Array) => void;
+  pong: (data: Uint8Array) => void;
+  close: (code: number | WebSocketError | unknown | undefined) => void; // unknown is an "any" error in catch - maybe worth wrapping?
+  error: () => void;
+};
+
 export interface WebSocketClient extends EventEmitter {
   send(message: string | Uint8Array): void;
   ping(message?: string | Uint8Array): void;
@@ -82,7 +94,7 @@ export interface WebSocketClient extends EventEmitter {
   isClosed: boolean | undefined;
 }
 
-export class WebSocketAcceptedClient extends EventEmitter
+export class WebSocketAcceptedClient extends GenericEventEmitter<DefaultClientEventTypes>
  implements WebSocketClient {
   state: WebSocketState = WebSocketState.CONNECTING;
   webSocket: DenoWebSocketType;
@@ -179,7 +191,7 @@ export class WebSocketAcceptedClient extends EventEmitter
   }
 }
 
-export class StandardWebSocketClient extends EventEmitter
+export class StandardWebSocketClient extends GenericEventEmitter<DefaultClientEventTypes>
   implements WebSocketClient {
   webSocket?: WebSocket;
   constructor(private endpoint?: string) {
