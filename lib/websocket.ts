@@ -83,9 +83,9 @@ export class WebSocketServer extends GenericEventEmitter<DefaultServerEventTypes
   }
 }
 
-export type DefaultClientEventTypes = {
+export type DefaultClientEventTypes<AllowedMessageEventContent> = {
   open: () => void;
-  message: (data: string | Uint8Array) => void;
+  message: (data: MessageEvent<AllowedMessageEventContent> | AllowedMessageEventContent) => void;
   ping: (data: Uint8Array) => void;
   pong: (data: Uint8Array) => void;
   close: (code?: number | WebSocketError | unknown) => void; // unknown is an "any" error in catch - maybe worth wrapping?
@@ -100,7 +100,9 @@ export interface WebSocketClient extends EventEmitter {
   isClosed: boolean | undefined;
 }
 
-export class WebSocketAcceptedClient extends GenericEventEmitter<DefaultClientEventTypes>
+type WebSocketAcceptedClientAllowedMessageEventContent = string | Uint8Array;
+type DefaultAcceptedClientEventTypes = DefaultClientEventTypes<WebSocketAcceptedClientAllowedMessageEventContent>;
+export class WebSocketAcceptedClient extends GenericEventEmitter<DefaultAcceptedClientEventTypes>
  implements WebSocketClient {
   state: WebSocketState = WebSocketState.CONNECTING;
   webSocket: DenoWebSocketType;
@@ -197,7 +199,7 @@ export class WebSocketAcceptedClient extends GenericEventEmitter<DefaultClientEv
   }
 }
 
-export class StandardWebSocketClient extends GenericEventEmitter<DefaultClientEventTypes>
+export class StandardWebSocketClient extends GenericEventEmitter<DefaultClientEventTypes<any>>
   implements WebSocketClient {
   webSocket?: WebSocket;
   constructor(private endpoint?: string) {
