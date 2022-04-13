@@ -17,7 +17,7 @@ export enum WebSocketState {
   CLOSED = 3,
 }
 
-export type EventTypesSet = { [key: string]: Parameters<EventEmitter["on"]>[1] }; 
+export type EventTypesSet = { [key: string]: (...params: any[]) => void }; 
 export type DefaultServerEventTypes = {
   connection: (ws: WebSocketClient, url: ServerRequest["url"]) => void;
   error: (err: Error | unknown) => void; // unknown is an "any" error in catch case - maybe worth wrapping?
@@ -25,8 +25,14 @@ export type DefaultServerEventTypes = {
 
 export class GenericEventEmitter<EventTypes extends EventTypesSet> extends EventEmitter {
   on <K extends keyof EventTypes>(eventType: K, listener: EventTypes[K]): this;
+  /** @deprecated unsafe fallback to EventEmitter.on (no typeguards) */
   on (...params: Parameters<EventEmitter["on"]>): this;
   on (...params: Parameters<EventEmitter["on"]>): this { return super.on(...params) };
+
+  emit <K extends keyof EventTypes>(eventType: K, ...params: Parameters<EventTypes[K]>): boolean;
+  /** @deprecated unsafe fallback to EventEmitter.emit (no typeguards) */
+  emit (...params: Parameters<EventEmitter["emit"]>): boolean;
+  emit (...params: Parameters<EventEmitter["emit"]>): boolean { return super.emit(...params) }
 }
 
 export class WebSocketServer extends GenericEventEmitter<DefaultServerEventTypes> {
@@ -82,7 +88,7 @@ export type DefaultClientEventTypes = {
   message: (data: string | Uint8Array) => void;
   ping: (data: Uint8Array) => void;
   pong: (data: Uint8Array) => void;
-  close: (code: number | WebSocketError | unknown | undefined) => void; // unknown is an "any" error in catch - maybe worth wrapping?
+  close: (code?: number | WebSocketError | unknown) => void; // unknown is an "any" error in catch - maybe worth wrapping?
   error: () => void;
 };
 
