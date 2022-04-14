@@ -17,13 +17,13 @@ export enum WebSocketState {
   CLOSED = 3,
 }
 
-export type EventTypesSet = { [key: string]: (...params: any[]) => void }; 
+export type EventTypesMap = { [key: string]: (...params: any[]) => void };
 export type DefaultServerEventTypes = {
   connection: (ws: WebSocketClient, url: ServerRequest["url"]) => void;
   error: (err: Error | unknown) => void; // unknown is an "any" error in catch case - maybe worth wrapping?
 };
 
-export class GenericEventEmitter<EventTypes extends EventTypesSet> extends EventEmitter {
+export class GenericEventEmitter<EventTypes extends EventTypesMap> extends EventEmitter {
   on <K extends keyof EventTypes>(eventType: K, listener: EventTypes[K]): this;
   /** @deprecated unsafe fallback to EventEmitter.on (no typeguards) */
   on (...params: Parameters<EventEmitter["on"]>): this;
