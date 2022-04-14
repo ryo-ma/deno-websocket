@@ -85,7 +85,7 @@ export class WebSocketServer extends GenericEventEmitter<DefaultServerEventTypes
 
 export type DefaultClientEventTypes<AllowedMessageEventContent> = {
   open: () => void;
-  message: (data: MessageEvent<AllowedMessageEventContent> | AllowedMessageEventContent) => void;
+  message: (data: AllowedMessageEventContent) => void;
   ping: (data: Uint8Array) => void;
   pong: (data: Uint8Array) => void;
   close: (code?: number | WebSocketError | unknown) => void; // unknown is an "any" error in catch - maybe worth wrapping?
