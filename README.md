@@ -109,7 +109,7 @@ ws.on("message", function (message: string) {
 
 | field | detail | type |
 | --- | --- | --- |
-| websocket.isClose | Get the close flag | Boolean \| undefined |
+| websocket.isClosed | Get the close flag | Boolean \| undefined |
 
 ### Method
 
